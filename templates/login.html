@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMBHub - Connexion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #2d3359; /* Une couleur neutre de l'ambassade en fond pour l'unité */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* CONTENEUR DES VAGUES ORGANIQUES */
+        .bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Style de base des vagues de couleur (Blobs organiques) */
+        .wave-blob {
+            position: absolute;
+            border-radius: 50%;
+            /* Un flou immense pour créer l'effet de diffusion de lumière propre à Apple */
+            filter: blur(140px); 
+            opacity: 0.85;
+            mix-blend-mode: normal; /* Évite les mélanges de couleurs bizarres ou ternes */
+        }
+
+        /* CONFIGURATION DES 4 COULEURS :
+           Des tailles géantes pour occuper l'espace et des timings fluides décalés 
+           pour qu'elles traversent le centre à tour de rôle à temps égal.
+        */
+        .blob-red {
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, #d01c1f 0%, rgba(208,28,31,0) 75%);
+            top: -20%;
+            left: -20%;
+            animation: waveRed 14s infinite ease-in-out alternate;
+        }
+
+        .blob-blue {
+            width: 1100px;
+            height: 1100px;
+            background: radial-gradient(circle, #2d3359 0%, rgba(45,51,89,0) 75%);
+            bottom: -30%;
+            left: -10%;
+            animation: waveBlue 18s infinite ease-in-out alternate;
+        }
+
+        .blob-yellow {
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, #f7b718 0%, rgba(247,183,24,0) 75%);
+            top: -30%;
+            right: -10%;
+            animation: waveYellow 12s infinite ease-in-out alternate;
+        }
+
+        .blob-green {
+            width: 1100px;
+            height: 1100px;
+            background: radial-gradient(circle, #008658 0%, rgba(0,134,88,0) 75%);
+            bottom: -20%;
+            right: -20%;
+            animation: waveGreen 16s infinite ease-in-out alternate;
+        }
+
+        /* TRAJECTOIRES EN VAGUES :
+           Chaque couleur oscille profondément vers le centre de l'écran 
+           puis se retire pour laisser la suivante s'exprimer.
+        */
+        @keyframes waveRed {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30vw, 20vh) scale(1.1); }
+            100% { transform: translate(15vw, 40vh) scale(1); }
+        }
+
+        @keyframes waveBlue {
+            0% { transform: translate(0, 0) scale(1.05); }
+            50% { transform: translate(25vw, -30vh) scale(0.95); }
+            100% { transform: translate(40vw, -15vh) scale(1.1); }
+        }
+
+        @keyframes waveYellow {
+            0% { transform: translate(0, 0) scale(0.95); }
+            50% { transform: translate(-35vw, 25vh) scale(1.1); }
+            100% { transform: translate(-20vw, 45vh) scale(1); }
+        }
+
+        @keyframes waveGreen {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-25vw, -25vh) scale(1.15); }
+            100% { transform: translate(-45vw, -10vh) scale(0.95); }
+        }
+
+        /* INTERFACE ET GLASSMORPHISM SOMBRE CORRIGÉ */
+        .login-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        /* Titre blanc mat pur de qualité premium */
+        .hub-title {
+            color: #ffffff;
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            position: absolute;
+            transition: all 2s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 11;
+            pointer-events: none;
+        }
+
+        .hub-title.shrunk {
+            font-size: 2.2rem;
+            position: relative;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .login-card {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.22);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s ease-out;
+        }
+
+        .login-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group i.input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            outline: none;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: #fff;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-container">
+        <div class="wave-blob blob-red"></div>
+        <div class="wave-blob blob-blue"></div>
+        <div class="wave-blob blob-yellow"></div>
+        <div class="wave-blob blob-green"></div>
+    </div>
+
+    <div class="login-container">
+        <h1 class="hub-title" id="hubTitle">AMBHub</h1>
+
+        <div class="login-card" id="loginCard">
+            <form method="POST" action=".">
+                {% csrf_token %}
+                <div class="input-group">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" name="username" placeholder="Identifiant" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" name="password" id="passwordInput" placeholder="Mot de passe" required>
+                    <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+                </div>
+
+                <button type="submit" class="login-btn">Se connecter</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const hubTitle = document.getElementById('hubTitle');
+        const loginCard = document.getElementById('loginCard');
+        const passwordInput = document.getElementById('passwordInput');
+        const togglePassword = document.getElementById('togglePassword');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                hubTitle.classList.add('shrunk');
+            }, 1500);
+
+            setTimeout(() => {
+                loginCard.classList.add('visible');
+            }, 2700);
+        });
+
+        togglePassword.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePassword.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                togglePassword.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+    </script>
+</body>
+</html>
