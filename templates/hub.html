@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body, html {
@@ -23,7 +23,6 @@
             align-items: center;
         }
 
-        /* ON RETROUVE EXACTEMENT LE MÊME FOND DE VAGUES LUMINEUSES */
         .bg-container {
             position: absolute;
             top: 0;
@@ -94,7 +93,6 @@
             100% { transform: translate(-45vw, -10vh) scale(0.95); }
         }
 
-        /* CONTENEUR PRINCIPAL */
         .hub-container {
             position: relative;
             z-index: 10;
@@ -106,7 +104,6 @@
             transition: all 0.5s ease-in-out;
         }
 
-        /* Titre fixe à sa taille réduite */
         .hub-title {
             font-size: 2.5rem;
             font-weight: 800;
@@ -114,7 +111,6 @@
             margin-bottom: 10px;
         }
 
-        /* Texte de bienvenue */
         .hub-subtitle {
             font-size: 1.1rem;
             font-weight: 400;
@@ -126,7 +122,6 @@
             line-height: 1.5;
         }
 
-        /* GRILLE DES CARTES (CARDS) */
         .cards-grid {
             display: flex;
             justify-content: center;
@@ -135,7 +130,6 @@
             width: 100%;
         }
 
-        /* LIENS ET DESIGN DES CARTES (Même transparence Glassmorphism) */
         .card-link {
             text-decoration: none;
             color: inherit;
@@ -161,7 +155,6 @@
             height: 100%;
         }
 
-        /* Effet de survol élégant (Apple Style) */
         .hub-card:hover {
             transform: translateY(-8px);
             background: rgba(0, 0, 0, 0.3);
@@ -169,7 +162,6 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
         }
 
-        /* Décorations intérieures (Icônes circulaires) */
         .card-icon-wrapper {
             width: 80px;
             height: 80px;
@@ -206,7 +198,6 @@
             line-height: 1.4;
         }
 
-        /* Petit bouton "Accéder" discret en bas de chaque carte */
         .card-action {
             margin-top: 25px;
             font-size: 0.85rem;
@@ -222,7 +213,6 @@
             opacity: 1;
         }
 
-        /* BOUTON DE DÉCONNEXION DISCRET EN HAUT À DROITE */
         .logout-btn {
             position: absolute;
             top: 30px;
@@ -244,14 +234,13 @@
             background: rgba(255,255,255,0.15);
         }
 
-        /* INTÉGRATION NOUVEAU LOADER STYLE APPLE */
         .loader-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.35);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
             z-index: 100;
@@ -370,27 +359,31 @@
 
         cards.forEach(card => {
             card.addEventListener('click', function(e) {
+                // 1. Bloquer l'action immédiate pour laisser le navigateur dessiner le loader
+                e.preventDefault();
+
                 const url = this.getAttribute('href');
                 const appName = this.querySelector('.card-title').textContent;
-                
-                // 1. Bloquer impérativement l'action immédiate du lien
-                e.preventDefault();
-                
-                // 2. Assigner instantanément le texte personnalisé
+
+                if (!url || url === '#') return;
+
+                // 2. Mettre à jour le texte
                 loaderText.textContent = `Connexion sécurisée à ${appName} en cours...`;
-                
-                // 3. Forcer le rafraîchissement d'affichage graphique de la page d'accueil (Rendu Prioritaire)
-                requestAnimationFrame(() => {
-                    hubContainer.classList.add('fade-out');
-                    loaderOverlay.classList.add('active');
-                    
-                    // 4. Lancer l'ouverture de l'onglet externe immédiatement après la mise en place du loader
-                    if (url !== '#') {
-                        setTimeout(() => {
-                            window.open(url, '_blank');
-                        }, 50);
-                    }
-                });
+
+                // 3. Activer immédiatement l'affichage graphique du loader
+                hubContainer.classList.add('fade-out');
+                loaderOverlay.classList.add('active');
+
+                // 4. Déclencher l'ouverture après un délai de 180ms pour garantir que le spinner soit visible
+                setTimeout(() => {
+                    window.open(url, '_blank');
+
+                    // 5. Rétablir la page d'accueil au cas où l'utilisateur revient sur cet onglet plus tard
+                    setTimeout(() => {
+                        hubContainer.classList.remove('fade-out');
+                        loaderOverlay.classList.remove('active');
+                    }, 1500);
+                }, 180);
             });
         });
     </script>
