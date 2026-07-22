@@ -10,20 +10,21 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #2d3359; /* Une couleur neutre de l'ambassade en fond pour l'unité */
+            /* FOND IDENTIQUE A ONLINEREGISTRY */
+            background: linear-gradient(135deg, #2A548A 0%, #3B6FA8 50%, #4A7EB8 100%);
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* CONTENEUR DES VAGUES ORGANIQUES */
+        /* CONTENEUR DES VAGUES ORGANIQUES DU HUB (Superposé au dégradé) */
         .bg-container {
             position: absolute;
             top: 0;
@@ -34,20 +35,14 @@
             overflow: hidden;
         }
 
-        /* Style de base des vagues de couleur (Blobs organiques) */
         .wave-blob {
             position: absolute;
             border-radius: 50%;
-            /* Un flou immense pour créer l'effet de diffusion de lumière propre à Apple */
             filter: blur(140px); 
-            opacity: 0.85;
-            mix-blend-mode: normal; /* Évite les mélanges de couleurs bizarres ou ternes */
+            opacity: 0.65;
         }
 
-        /* CONFIGURATION DES 4 COULEURS :
-           Des tailles géantes pour occuper l'espace et des timings fluides décalés 
-           pour qu'elles traversent le centre à tour de rôle à temps égal.
-        */
+        /* COULEURS SIGNATURE DU HUB MAURITIUS */
         .blob-red {
             width: 1000px;
             height: 1000px;
@@ -84,10 +79,6 @@
             animation: waveGreen 16s infinite ease-in-out alternate;
         }
 
-        /* TRAJECTOIRES EN VAGUES :
-           Chaque couleur oscille profondément vers le centre de l'écran 
-           puis se retire pour laisser la suivante s'exprimer.
-        */
         @keyframes waveRed {
             0% { transform: translate(0, 0) scale(1); }
             50% { transform: translate(30vw, 20vh) scale(1.1); }
@@ -112,7 +103,7 @@
             100% { transform: translate(-45vw, -10vh) scale(0.95); }
         }
 
-        /* INTERFACE ET GLASSMORPHISM SOMBRE CORRIGÉ */
+        /* INTERFACE & CARTE GLASSMORPHISM SOMBRE STYLISÉE */
         .login-container {
             position: relative;
             z-index: 10;
@@ -120,24 +111,24 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             padding: 20px;
         }
 
-        /* Titre blanc mat pur de qualité premium */
         .hub-title {
             color: #ffffff;
             font-size: 5rem;
             font-weight: 800;
             letter-spacing: 5px;
             position: absolute;
-            transition: all 2s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 1.8s cubic-bezier(0.25, 1, 0.5, 1);
             z-index: 11;
             pointer-events: none;
+            text-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .hub-title.shrunk {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             position: relative;
             margin-bottom: 25px;
             letter-spacing: 2px;
@@ -145,13 +136,13 @@
 
         .login-card {
             width: 100%;
-            background: rgba(0, 0, 0, 0.22);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
+            background: rgba(42, 84, 138, 0.25);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 40px 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
             opacity: 0;
             transform: translateY(30px);
             transition: all 1.2s ease-out;
@@ -164,59 +155,67 @@
 
         .input-group {
             position: relative;
-            margin-bottom: 25px;
+            margin-bottom: 22px;
         }
 
         .input-group i.input-icon {
             position: absolute;
-            left: 15px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
             color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
         }
 
         .input-group input {
             width: 100%;
-            padding: 15px 15px 15px 45px;
-            background: rgba(0, 0, 0, 0.25);
+            padding: 14px 15px 14px 45px;
+            background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            border-radius: 10px;
             outline: none;
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
         }
 
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
         .input-group input:focus {
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(0, 0, 0, 0.35);
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
         }
 
         .toggle-password {
             position: absolute;
-            right: 15px;
+            right: 16px;
             top: 50%;
             transform: translateY(-50%);
             color: rgba(255, 255, 255, 0.7);
             cursor: pointer;
+            font-size: 0.95rem;
         }
 
         .login-btn {
             width: 100%;
-            padding: 15px;
-            background: #fff;
+            padding: 14px;
+            background: #ffffff;
             border: none;
-            border-radius: 8px;
-            color: #000;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 10px;
+            color: #2F619E;
+            font-size: 0.95rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
+            margin-top: 5px;
         }
 
         .login-btn:hover {
             background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             transform: translateY(-2px);
         }
     </style>
@@ -238,12 +237,12 @@
                 {% csrf_token %}
                 <div class="input-group">
                     <i class="fa-solid fa-user input-icon"></i>
-                    <input type="text" name="username" placeholder="Identifiant" required>
+                    <input type="text" name="username" placeholder="Identifiant" required autocomplete="username">
                 </div>
                 
                 <div class="input-group">
                     <i class="fa-solid fa-lock input-icon"></i>
-                    <input type="password" name="password" id="passwordInput" placeholder="Mot de passe" required>
+                    <input type="password" name="password" id="passwordInput" placeholder="Mot de passe" required autocomplete="current-password">
                     <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
                 </div>
 
@@ -261,11 +260,11 @@
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 hubTitle.classList.add('shrunk');
-            }, 1500);
+            }, 1200);
 
             setTimeout(() => {
                 loginCard.classList.add('visible');
-            }, 2700);
+            }, 2200);
         });
 
         togglePassword.addEventListener('click', () => {
