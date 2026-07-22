@@ -17,14 +17,12 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            /* FOND IDENTIQUE A ONLINEREGISTRY */
             background: linear-gradient(135deg, #2A548A 0%, #3B6FA8 50%, #4A7EB8 100%);
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* CONTENEUR DES VAGUES ORGANIQUES DU HUB (Superposé au dégradé) */
         .bg-container {
             position: absolute;
             top: 0;
@@ -42,40 +40,31 @@
             opacity: 0.65;
         }
 
-        /* COULEURS SIGNATURE DU HUB MAURITIUS */
         .blob-red {
-            width: 1000px;
-            height: 1000px;
+            width: 1000px; height: 1000px;
             background: radial-gradient(circle, #d01c1f 0%, rgba(208,28,31,0) 75%);
-            top: -20%;
-            left: -20%;
+            top: -20%; left: -20%;
             animation: waveRed 14s infinite ease-in-out alternate;
         }
 
         .blob-blue {
-            width: 1100px;
-            height: 1100px;
+            width: 1100px; height: 1100px;
             background: radial-gradient(circle, #2d3359 0%, rgba(45,51,89,0) 75%);
-            bottom: -30%;
-            left: -10%;
+            bottom: -30%; left: -10%;
             animation: waveBlue 18s infinite ease-in-out alternate;
         }
 
         .blob-yellow {
-            width: 1000px;
-            height: 1000px;
+            width: 1000px; height: 1000px;
             background: radial-gradient(circle, #f7b718 0%, rgba(247,183,24,0) 75%);
-            top: -30%;
-            right: -10%;
+            top: -30%; right: -10%;
             animation: waveYellow 12s infinite ease-in-out alternate;
         }
 
         .blob-green {
-            width: 1100px;
-            height: 1100px;
+            width: 1100px; height: 1100px;
             background: radial-gradient(circle, #008658 0%, rgba(0,134,88,0) 75%);
-            bottom: -20%;
-            right: -20%;
+            bottom: -20%; right: -20%;
             animation: waveGreen 16s infinite ease-in-out alternate;
         }
 
@@ -103,7 +92,6 @@
             100% { transform: translate(-45vw, -10vh) scale(0.95); }
         }
 
-        /* INTERFACE & CARTE GLASSMORPHISM SOMBRE STYLISÉE */
         .login-container {
             position: relative;
             z-index: 10;
@@ -155,7 +143,7 @@
 
         .input-group {
             position: relative;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .input-group i.input-icon {
@@ -199,6 +187,25 @@
             font-size: 0.95rem;
         }
 
+        /* STYLE NOUVEAU : CASE SE SOUVENIR DE MOI */
+        .remember-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.88rem;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .remember-group input[type="checkbox"] {
+            accent-color: #3498db;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
         .login-btn {
             width: 100%;
             padding: 14px;
@@ -210,7 +217,6 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 5px;
         }
 
         .login-btn:hover {
@@ -245,6 +251,12 @@
                     <input type="password" name="password" id="passwordInput" placeholder="Mot de passe" required autocomplete="current-password">
                     <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
                 </div>
+
+                <!-- OPTION : SE SOUVENIR DE MOI (10 JOURS) -->
+                <label class="remember-group">
+                    <input type="checkbox" name="remember_me" value="1">
+                    <span>Se souvenir de moi pendant 10 jours</span>
+                </label>
 
                 <button type="submit" class="login-btn">Se connecter</button>
             </form>
