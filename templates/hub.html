@@ -15,82 +15,21 @@
 
         body, html {
             width: 100%;
-            height: 100%;
+            height: 100vh;
             overflow: hidden;
-            background-color: #2d3359;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: linear-gradient(135deg, #a64b2a, #c05c33, #7a3118, #8e3e20);
+            background-size: 400% 400%;
+            animation: liquidBackground 15s ease infinite;
+            position: relative;
         }
 
-        .bg-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .wave-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(140px); 
-            opacity: 0.85;
-        }
-
-        .blob-red {
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(circle, #d01c1f 0%, rgba(208,28,31,0) 75%);
-            top: -20%; left: -20%;
-            animation: waveRed 14s infinite ease-in-out alternate;
-        }
-
-        .blob-blue {
-            width: 1100px;
-            height: 1100px;
-            background: radial-gradient(circle, #2d3359 0%, rgba(45,51,89,0) 75%);
-            bottom: -30%; left: -10%;
-            animation: waveBlue 18s infinite ease-in-out alternate;
-        }
-
-        .blob-yellow {
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(circle, #f7b718 0%, rgba(247,183,24,0) 75%);
-            top: -30%; right: -10%;
-            animation: waveYellow 12s infinite ease-in-out alternate;
-        }
-
-        .blob-green {
-            width: 1100px;
-            height: 1100px;
-            background: radial-gradient(circle, #008658 0%, rgba(0,134,88,0) 75%);
-            bottom: -20%; right: -20%;
-            animation: waveGreen 16s infinite ease-in-out alternate;
-        }
-
-        @keyframes waveRed {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30vw, 20vh) scale(1.1); }
-            100% { transform: translate(15vw, 40vh) scale(1); }
-        }
-        @keyframes waveBlue {
-            0% { transform: translate(0, 0) scale(1.05); }
-            50% { transform: translate(25vw, -30vh) scale(0.95); }
-            100% { transform: translate(40vw, -15vh) scale(1.1); }
-        }
-        @keyframes waveYellow {
-            0% { transform: translate(0, 0) scale(0.95); }
-            50% { transform: translate(-35vw, 25vh) scale(1.1); }
-            100% { transform: translate(-20vw, 45vh) scale(1); }
-        }
-        @keyframes waveGreen {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-25vw, -25vh) scale(1.15); }
-            100% { transform: translate(-45vw, -10vh) scale(0.95); }
+        @keyframes liquidBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hub-container {
@@ -105,10 +44,11 @@
         }
 
         .hub-title {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             letter-spacing: 3px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            text-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
         }
 
         .hub-subtitle {
@@ -116,7 +56,7 @@
             font-weight: 400;
             opacity: 0.9;
             margin-bottom: 50px;
-            max-width: 600px;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.5;
@@ -138,13 +78,13 @@
         }
 
         .hub-card {
-            background: rgba(0, 0, 0, 0.22);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 45px 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -157,27 +97,27 @@
 
         .hub-card:hover {
             transform: translateY(-8px);
-            background: rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
         }
 
         .card-icon-wrapper {
             width: 80px;
             height: 80px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.4s;
         }
 
         .hub-card:hover .card-icon-wrapper {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.28);
+            transform: scale(1.08);
         }
 
         .card-icon-wrapper i {
@@ -194,7 +134,7 @@
 
         .card-desc {
             font-size: 0.9rem;
-            opacity: 0.7;
+            opacity: 0.85;
             line-height: 1.4;
         }
 
@@ -202,7 +142,7 @@
             margin-top: 25px;
             font-size: 0.85rem;
             font-weight: 600;
-            opacity: 0.5;
+            opacity: 0.7;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -218,20 +158,21 @@
             top: 30px;
             right: 30px;
             z-index: 12;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s;
         }
 
         .logout-btn:hover {
             color: #fff;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
         }
 
         .loader-overlay {
@@ -240,7 +181,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
             z-index: 100;
@@ -262,7 +203,7 @@
         .spinner {
             width: 50px;
             height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.15);
+            border: 3px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             border-top-color: #ffffff;
             animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
@@ -295,18 +236,11 @@
 </head>
 <body>
 
-    <div class="bg-container">
-        <div class="wave-blob blob-red"></div>
-        <div class="wave-blob blob-blue"></div>
-        <div class="wave-blob blob-yellow"></div>
-        <div class="wave-blob blob-green"></div>
-    </div>
-
     <a href="{% url 'deconnexion' %}" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Déconnexion</a>
 
     <div class="hub-container">
         <h1 class="hub-title">AMBHub</h1>
-        <p class="hub-subtitle">Bienvenue dans le hub de l'ambassade de Maurice, retrouvez ici tous les outils numériques de l'ambassade.</p>
+        <p class="hub-subtitle">Bienvenue dans le hub de l'Ambassade de Maurice, retrouvez ici tous les outils numériques de la délégation.</p>
 
         <div class="cards-grid">
             
