@@ -6,10 +6,10 @@
     <title>AMBHub - Connexion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- IMPORTATION DES POLICES ÉDITORIALES (OSWALD + PLUS JAKARTA SANS) -->
+    <!-- IMPORTATION POLICES : MONTSERRAT (EQUILIBRE PARFAIT) + PLUS JAKARTA SANS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -50,13 +50,13 @@
             padding: 20px;
         }
 
-        /* TITRE AMBHUB STRUCTURÉ ET HAUT */
+        /* TITRE : NI TROP COMPRIMÉ, NI TROP ETIRÉ */
         .hub-title {
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             color: #F2EBD9;
-            font-size: 5rem;
-            font-weight: 700;
-            letter-spacing: 4px;
+            font-size: 4.2rem;
+            font-weight: 800;
+            letter-spacing: 6px;
             text-transform: uppercase;
             position: absolute;
             transition: all 1.8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -66,20 +66,20 @@
         }
 
         .hub-title.shrunk {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             position: relative;
             margin-bottom: 25px;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
         }
 
-        /* CARTE DE CONNEXION ÉDITORIALE SOMBRE */
+        /* CARTE GLASSMORPHISME */
         .login-card {
             width: 100%;
             background: rgba(24, 18, 16, 0.45);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(242, 235, 217, 0.18);
-            border-radius: 20px;
+            border-radius: 22px;
             padding: 40px 30px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
             opacity: 0;
@@ -162,25 +162,27 @@
             cursor: pointer;
         }
 
+        /* BOUTON REDESIGNÉ : ÉLÉGANT, NET ET ULTRA-LISIBLE */
         .login-btn {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             background: #F2EBD9;
             border: none;
             border-radius: 12px;
-            color: #a64b2a;
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
+            color: #6b2d18;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .login-btn:hover {
             background: #ffffff;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            color: #a64b2a;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             transform: translateY(-2px);
         }
     </style>
