@@ -6,10 +6,9 @@
     <title>AMBHub - Tableau de bord</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CHANGEMENT DE POLICE : OSWALD (TITRES CONDENSÉS) + PLUS JAKARTA SANS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -49,16 +48,15 @@
             transition: all 0.5s ease-in-out;
         }
 
-        /* HEADER CORRIGÉ : POLICE OSWALD HAUTE ET LISIBLE */
         .hub-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 4.8rem;
-            font-weight: 700;
-            letter-spacing: 3px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: 5px;
             text-transform: uppercase;
             color: #F2EBD9;
             line-height: 1;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
@@ -80,10 +78,8 @@
             margin-left: auto;
             margin-right: auto;
             line-height: 1.6;
-            letter-spacing: 0.3px;
         }
 
-        /* GRILLE DE CARTES */
         .cards-grid {
             display: flex;
             justify-content: center;
@@ -172,11 +168,10 @@
             transform: translate(3px, -3px);
         }
 
-        /* TITRES DES CARTES CORRIGÉS */
         .card-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.7rem;
-            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
             color: #F2EBD9;
             margin-bottom: 12px;
             letter-spacing: 1px;
@@ -206,7 +201,6 @@
             opacity: 1;
         }
 
-        /* BOUTON DÉCONNEXION */
         .logout-btn {
             position: absolute;
             top: 35px;
@@ -232,7 +226,6 @@
             transform: translateY(-2px);
         }
 
-        /* LOADER D'OUVERTURE */
         .loader-overlay {
             position: fixed;
             top: 0;
@@ -274,9 +267,9 @@
         }
 
         .loader-text {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             opacity: 0.95;
