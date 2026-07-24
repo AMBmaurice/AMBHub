@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMBHub - Tableau de bord</title>
+    <title>AMBHub - Connexion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- IMPORTATION DES POLICES EDITORIALES D'INSPIRATION -->
+    <!-- IMPORTATION DES POLICES ÉDITORIALES (OSWALD + PLUS JAKARTA SANS) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -39,350 +39,205 @@
             100% { background-position: 0% 50%; }
         }
 
-        .hub-container {
+        .login-container {
             position: relative;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
-            max-width: 1140px;
-            padding: 40px 20px;
-            text-align: center;
-            transition: all 0.5s ease-in-out;
+            max-width: 420px;
+            padding: 20px;
         }
 
-        /* HEADER TYPOGRAPHIQUE ÉDITORIAL */
+        /* TITRE AMBHUB STRUCTURÉ ET HAUT */
         .hub-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 4.5rem;
-            font-weight: 800;
+            font-family: 'Oswald', sans-serif;
+            color: #F2EBD9;
+            font-size: 5rem;
+            font-weight: 700;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: #F2EBD9;
-            line-height: 1;
-            margin-bottom: 12px;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            transition: all 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 11;
+            pointer-events: none;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
-        .header-line {
-            width: 120px;
-            height: 2px;
-            background: #F2EBD9;
-            margin: 18px auto 22px auto;
-            opacity: 0.8;
+        .hub-title.shrunk {
+            font-size: 2.8rem;
+            position: relative;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
         }
 
-        .hub-subtitle {
-            font-size: 1.05rem;
-            font-weight: 400;
-            color: #F2EBD9;
-            opacity: 0.9;
-            margin-bottom: 50px;
-            max-width: 620px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-            letter-spacing: 0.3px;
-        }
-
-        /* GRILLE DE CARTES */
-        .cards-grid {
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            flex-wrap: wrap;
+        /* CARTE DE CONNEXION ÉDITORIALE SOMBRE */
+        .login-card {
             width: 100%;
-        }
-
-        .card-link {
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
-            max-width: 340px;
-        }
-
-        .hub-card {
             background: rgba(24, 18, 16, 0.45);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(242, 235, 217, 0.18);
             border-radius: 20px;
             padding: 40px 30px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            height: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s ease-out;
         }
 
-        .hub-card:hover {
-            transform: translateY(-8px);
-            background: rgba(24, 18, 16, 0.65);
-            border-color: rgba(242, 235, 217, 0.4);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-top-bar {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .card-icon-wrapper {
-            width: 54px;
-            height: 54px;
-            background: rgba(242, 235, 217, 0.12);
-            border-radius: 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid rgba(242, 235, 217, 0.15);
-            transition: all 0.4s;
-        }
-
-        .hub-card:hover .card-icon-wrapper {
-            background: #F2EBD9;
-            transform: scale(1.05);
-        }
-
-        .card-icon-wrapper i {
-            font-size: 1.4rem;
-            color: #F2EBD9;
-            transition: color 0.3s;
-        }
-
-        .hub-card:hover .card-icon-wrapper i {
-            color: #a64b2a;
-        }
-
-        .card-arrow {
-            font-size: 1.5rem;
-            color: #F2EBD9;
-            opacity: 0.5;
-            transition: all 0.3s ease;
-        }
-
-        .hub-card:hover .card-arrow {
+        .login-card.visible {
             opacity: 1;
-            transform: translate(3px, -3px);
+            transform: translateY(0);
         }
 
-        .card-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #F2EBD9;
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .card-desc {
-            font-size: 0.92rem;
-            color: #F2EBD9;
-            opacity: 0.8;
-            line-height: 1.55;
+        .input-group {
+            position: relative;
             margin-bottom: 20px;
         }
 
-        .card-action {
-            margin-top: auto;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #F2EBD9;
-            opacity: 0.6;
-            transition: opacity 0.3s;
-        }
-
-        .hub-card:hover .card-action {
-            opacity: 1;
-        }
-
-        /* BOUTON DÉCONNEXION */
-        .logout-btn {
+        .input-group i.input-icon {
             position: absolute;
-            top: 35px;
-            right: 40px;
-            z-index: 12;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(242, 235, 217, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            background: rgba(242, 235, 217, 0.12);
+            border: 1px solid rgba(242, 235, 217, 0.15);
+            border-radius: 12px;
+            outline: none;
             color: #F2EBD9;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 10px 20px;
-            border-radius: 30px;
-            background: rgba(24, 18, 16, 0.35);
-            border: 1px solid rgba(242, 235, 217, 0.2);
-            backdrop-filter: blur(15px);
+            font-size: 0.95rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             transition: all 0.3s;
         }
 
-        .logout-btn:hover {
-            background: #F2EBD9;
-            color: #a64b2a;
-            transform: translateY(-2px);
+        .input-group input::placeholder {
+            color: rgba(242, 235, 217, 0.55);
         }
 
-        /* LOADER D'OUVERTURE */
-        .loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(18, 12, 10, 0.55);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease-in-out;
+        .input-group input:focus {
+            background: rgba(242, 235, 217, 0.22);
+            border-color: rgba(242, 235, 217, 0.4);
+            box-shadow: 0 0 15px rgba(242, 235, 217, 0.1);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(242, 235, 217, 0.7);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .toggle-password:hover {
             color: #F2EBD9;
         }
 
-        .loader-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
+        .remember-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            color: rgba(242, 235, 217, 0.85);
+            font-size: 0.88rem;
+            user-select: none;
+            cursor: pointer;
         }
 
-        .spinner {
-            width: 48px;
-            height: 48px;
-            border: 3px solid rgba(242, 235, 217, 0.2);
-            border-radius: 50%;
-            border-top-color: #F2EBD9;
-            animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            margin-bottom: 20px;
+        .remember-group input[type="checkbox"] {
+            accent-color: #F2EBD9;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loader-text {
-            font-family: 'Syne', sans-serif;
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #F2EBD9;
+            border: none;
+            border-radius: 12px;
+            color: #a64b2a;
+            font-family: 'Oswald', sans-serif;
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            opacity: 0.95;
-            animation: pulse 2s infinite ease-in-out;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-
-        .hub-container.fade-out {
-            opacity: 0;
-            transform: scale(0.96);
+        .login-btn:hover {
+            background: #ffffff;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
-    <a href="{% url 'deconnexion' %}" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket" style="margin-right: 8px;"></i> Déconnexion</a>
+    <div class="login-container">
+        <h1 class="hub-title" id="hubTitle">AMBHub</h1>
 
-    <div class="hub-container">
-        <h1 class="hub-title">AMBHub</h1>
-        <div class="header-line"></div>
-        <p class="hub-subtitle">Plateforme centrale de l'Ambassade de Maurice. Accédez directement à vos applications métiers et outils de gestion.</p>
-
-        <div class="cards-grid">
-            
-            <a href="https://onlineregistry-fimz.onrender.com" target="_blank" class="card-link">
-                <div class="hub-card">
-                    <div class="card-top-bar">
-                        <div class="card-icon-wrapper">
-                            <i class="fa-solid fa-folder-open"></i>
-                        </div>
-                        <i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i>
-                    </div>
-                    <h2 class="card-title">OnlineRegistry</h2>
-                    <p class="card-desc">Gestion, suivi et archivage numérique des registres officiels de la délégation.</p>
-                    <div class="card-action">Accéder au registre</div>
+        <div class="login-card" id="loginCard">
+            <form method="POST" action=".">
+                {% csrf_token %}
+                <div class="input-group">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" name="username" placeholder="Identifiant" required autocomplete="username">
                 </div>
-            </a>
-
-            <a href="https://ambassstock.onrender.com" target="_blank" class="card-link">
-                <div class="hub-card">
-                    <div class="card-top-bar">
-                        <div class="card-icon-wrapper">
-                            <i class="fa-solid fa-boxes-stacked"></i>
-                        </div>
-                        <i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i>
-                    </div>
-                    <h2 class="card-title">AmbassStock</h2>
-                    <p class="card-desc">Système de gestion et d'inventaire numérique des stocks de l'Ambassade.</p>
-                    <div class="card-action">Consulter le stock</div>
+                
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" name="password" id="passwordInput" placeholder="Mot de passe" required autocomplete="current-password">
+                    <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
                 </div>
-            </a>
 
-            <a href="https://docs.google.com/spreadsheets/d/1WbvtVIrAbLtuS5bBkjIQo33I8q6i_eA9KGZ0G51frv0/edit?gid=1050794157#gid=1050794157" target="_blank" class="card-link">
-                <div class="hub-card">
-                    <div class="card-top-bar">
-                        <div class="card-icon-wrapper">
-                            <i class="fa-solid fa-id-card"></i>
-                        </div>
-                        <i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i>
-                    </div>
-                    <h2 class="card-title">Passeport</h2>
-                    <p class="card-desc">Suivi, traitement et gestion numérique des demandes de passeports de la délégation.</p>
-                    <div class="card-action">Suivi passeports</div>
-                </div>
-            </a>
+                <label class="remember-group">
+                    <input type="checkbox" name="remember_me" value="1">
+                    <span>Se souvenir de moi</span>
+                </label>
 
+                <button type="submit" class="login-btn">Se connecter</button>
+            </form>
         </div>
     </div>
 
-    <div class="loader-overlay" id="loaderOverlay">
-        <div class="spinner"></div>
-        <p class="loader-text" id="loaderText">Lancement de l'application...</p>
-    </div>
-
     <script>
-        const cards = document.querySelectorAll('.card-link');
-        const loaderOverlay = document.getElementById('loaderOverlay');
-        const loaderText = document.getElementById('loaderText');
-        const hubContainer = document.querySelector('.hub-container');
+        const hubTitle = document.getElementById('hubTitle');
+        const loginCard = document.getElementById('loginCard');
+        const passwordInput = document.getElementById('passwordInput');
+        const togglePassword = document.getElementById('togglePassword');
 
-        cards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                e.preventDefault();
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                hubTitle.classList.add('shrunk');
+            }, 1200);
 
-                const url = this.getAttribute('href');
-                const appName = this.querySelector('.card-title').textContent;
+            setTimeout(() => {
+                loginCard.classList.add('visible');
+            }, 2200);
+        });
 
-                if (!url || url === '#') return;
-
-                loaderText.textContent = `Ouverture de ${appName}...`;
-
-                hubContainer.classList.add('fade-out');
-                loaderOverlay.classList.add('active');
-
-                setTimeout(() => {
-                    window.open(url, '_blank');
-
-                    setTimeout(() => {
-                        hubContainer.classList.remove('fade-out');
-                        loaderOverlay.classList.remove('active');
-                    }, 1500);
-                }, 180);
-            });
+        togglePassword.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePassword.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                togglePassword.classList.replace('fa-eye-slash', 'fa-eye');
+            }
         });
     </script>
 </body>
