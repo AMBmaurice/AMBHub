@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AMBHub - Tableau de bord</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CHANGEMENT DE POLICE : OSWALD (TITRES CONDENSÉS) + PLUS JAKARTA SANS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body, html {
@@ -20,9 +25,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #a64b2a, #c05c33, #7a3118, #8e3e20);
+            background: linear-gradient(135deg, #a64b2a, #be5733, #80351b, #933f21);
             background-size: 400% 400%;
-            animation: liquidBackground 15s ease infinite;
+            animation: liquidBackground 16s ease infinite;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            color: #F2EBD9;
             position: relative;
         }
 
@@ -36,36 +43,51 @@
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1140px;
             padding: 40px 20px;
             text-align: center;
-            color: #ffffff;
             transition: all 0.5s ease-in-out;
         }
 
+        /* HEADER CORRIGÉ : POLICE OSWALD HAUTE ET LISIBLE */
         .hub-title {
-            font-size: 2.8rem;
-            font-weight: 800;
+            font-family: 'Oswald', sans-serif;
+            font-size: 4.8rem;
+            font-weight: 700;
             letter-spacing: 3px;
-            margin-bottom: 12px;
-            text-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            text-transform: uppercase;
+            color: #F2EBD9;
+            line-height: 1;
+            margin-bottom: 15px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-line {
+            width: 80px;
+            height: 2px;
+            background: #F2EBD9;
+            margin: 18px auto 22px auto;
+            opacity: 0.8;
         }
 
         .hub-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 400;
+            color: #F2EBD9;
             opacity: 0.9;
             margin-bottom: 50px;
-            max-width: 650px;
+            max-width: 620px;
             margin-left: auto;
             margin-right: auto;
-            line-height: 1.5;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
         }
 
+        /* GRILLE DE CARTES */
         .cards-grid {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 28px;
             flex-wrap: wrap;
             width: 100%;
         }
@@ -74,20 +96,21 @@
             text-decoration: none;
             color: inherit;
             width: 100%;
-            max-width: 320px;
+            max-width: 340px;
         }
 
         .hub-card {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(24, 18, 16, 0.45);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(242, 235, 217, 0.18);
             border-radius: 20px;
-            padding: 45px 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            padding: 40px 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
+            text-align: left;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
             position: relative;
@@ -97,55 +120,85 @@
 
         .hub-card:hover {
             transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+            background: rgba(24, 18, 16, 0.65);
+            border-color: rgba(242, 235, 217, 0.4);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
         .card-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            background: rgba(242, 235, 217, 0.12);
+            border-radius: 14px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(242, 235, 217, 0.15);
             transition: all 0.4s;
         }
 
         .hub-card:hover .card-icon-wrapper {
-            background: rgba(255, 255, 255, 0.28);
-            transform: scale(1.08);
+            background: #F2EBD9;
+            transform: scale(1.05);
         }
 
         .card-icon-wrapper i {
-            font-size: 2rem;
-            color: #ffffff;
+            font-size: 1.4rem;
+            color: #F2EBD9;
+            transition: color 0.3s;
         }
 
+        .hub-card:hover .card-icon-wrapper i {
+            color: #a64b2a;
+        }
+
+        .card-arrow {
+            font-size: 1.5rem;
+            color: #F2EBD9;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .hub-card:hover .card-arrow {
+            opacity: 1;
+            transform: translate(3px, -3px);
+        }
+
+        /* TITRES DES CARTES CORRIGÉS */
         .card-title {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #F2EBD9;
             margin-bottom: 12px;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .card-desc {
-            font-size: 0.9rem;
-            opacity: 0.85;
-            line-height: 1.4;
+            font-size: 0.92rem;
+            color: #F2EBD9;
+            opacity: 0.8;
+            line-height: 1.55;
+            margin-bottom: 20px;
         }
 
         .card-action {
-            margin-top: 25px;
-            font-size: 0.85rem;
+            margin-top: auto;
+            font-size: 0.8rem;
             font-weight: 600;
-            opacity: 0.7;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #F2EBD9;
+            opacity: 0.6;
             transition: opacity 0.3s;
         }
 
@@ -153,35 +206,40 @@
             opacity: 1;
         }
 
+        /* BOUTON DÉCONNEXION */
         .logout-btn {
             position: absolute;
-            top: 30px;
-            right: 30px;
+            top: 35px;
+            right: 40px;
             z-index: 12;
-            color: rgba(255, 255, 255, 0.85);
+            color: #F2EBD9;
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 8px 18px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(24, 18, 16, 0.35);
+            border: 1px solid rgba(242, 235, 217, 0.2);
+            backdrop-filter: blur(15px);
             transition: all 0.3s;
         }
 
         .logout-btn:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.25);
+            background: #F2EBD9;
+            color: #a64b2a;
             transform: translateY(-2px);
         }
 
+        /* LOADER D'OUVERTURE */
         .loader-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(18, 12, 10, 0.55);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
             z-index: 100;
@@ -192,7 +250,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease-in-out;
-            color: #ffffff;
+            color: #F2EBD9;
         }
 
         .loader-overlay.active {
@@ -201,11 +259,11 @@
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.2);
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(242, 235, 217, 0.2);
             border-radius: 50%;
-            border-top-color: #ffffff;
+            border-top-color: #F2EBD9;
             animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
             margin-bottom: 20px;
         }
@@ -216,10 +274,12 @@
         }
 
         .loader-text {
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            opacity: 0.9;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.95;
             animation: pulse 2s infinite ease-in-out;
         }
 
@@ -236,44 +296,54 @@
 </head>
 <body>
 
-    <a href="{% url 'deconnexion' %}" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Déconnexion</a>
+    <a href="{% url 'deconnexion' %}" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket" style="margin-right: 8px;"></i> Déconnexion</a>
 
     <div class="hub-container">
         <h1 class="hub-title">AMBHub</h1>
-        <p class="hub-subtitle">Bienvenue dans le hub de l'Ambassade de Maurice, retrouvez ici tous les outils numériques de la délégation.</p>
+        <div class="header-line"></div>
+        <p class="hub-subtitle">Plateforme centrale de l'Ambassade de Maurice. Accédez directement à vos applications métiers et outils de gestion.</p>
 
         <div class="cards-grid">
             
             <a href="https://onlineregistry-fimz.onrender.com" target="_blank" class="card-link">
                 <div class="hub-card">
-                    <div class="card-icon-wrapper">
-                        <i class="fa-solid fa-folder-open"></i>
+                    <div class="card-top-bar">
+                        <div class="card-icon-wrapper">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i>
                     </div>
                     <h2 class="card-title">OnlineRegistry</h2>
                     <p class="card-desc">Gestion, suivi et archivage numérique des registres officiels de la délégation.</p>
-                    <div class="card-action">Ouvrir l'outil <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    <div class="card-action">Accéder au registre</div>
                 </div>
             </a>
 
             <a href="https://ambassstock.onrender.com" target="_blank" class="card-link">
                 <div class="hub-card">
-                    <div class="card-icon-wrapper">
-                        <i class="fa-solid fa-boxes-stacked"></i>
+                    <div class="card-top-bar">
+                        <div class="card-icon-wrapper">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i>
                     </div>
                     <h2 class="card-title">AmbassStock</h2>
                     <p class="card-desc">Système de gestion et d'inventaire numérique des stocks de l'Ambassade.</p>
-                    <div class="card-action">Ouvrir l'outil <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    <div class="card-action">Consulter le stock</div>
                 </div>
             </a>
 
             <a href="https://docs.google.com/spreadsheets/d/1WbvtVIrAbLtuS5bBkjIQo33I8q6i_eA9KGZ0G51frv0/edit?gid=1050794157#gid=1050794157" target="_blank" class="card-link">
                 <div class="hub-card">
-                    <div class="card-icon-wrapper">
-                        <i class="fa-solid fa-id-card"></i>
+                    <div class="card-top-bar">
+                        <div class="card-icon-wrapper">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i>
                     </div>
                     <h2 class="card-title">Passeport</h2>
                     <p class="card-desc">Suivi, traitement et gestion numérique des demandes de passeports de la délégation.</p>
-                    <div class="card-action">Ouvrir l'outil <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    <div class="card-action">Suivi passeports</div>
                 </div>
             </a>
 
@@ -293,7 +363,6 @@
 
         cards.forEach(card => {
             card.addEventListener('click', function(e) {
-                // 1. Bloquer l'action immédiate pour laisser le navigateur dessiner le loader
                 e.preventDefault();
 
                 const url = this.getAttribute('href');
@@ -301,18 +370,14 @@
 
                 if (!url || url === '#') return;
 
-                // 2. Mettre à jour le texte
-                loaderText.textContent = `Connexion sécurisée à ${appName} en cours...`;
+                loaderText.textContent = `Ouverture de ${appName}...`;
 
-                // 3. Activer immédiatement l'affichage graphique du loader
                 hubContainer.classList.add('fade-out');
                 loaderOverlay.classList.add('active');
 
-                // 4. Déclencher l'ouverture après un délai de 180ms pour garantir que le spinner soit visible
                 setTimeout(() => {
                     window.open(url, '_blank');
 
-                    // 5. Rétablir la page d'accueil au cas où l'utilisateur revient sur cet onglet plus tard
                     setTimeout(() => {
                         hubContainer.classList.remove('fade-out');
                         loaderOverlay.classList.remove('active');
